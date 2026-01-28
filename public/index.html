@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Analytics Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Vibe Analytics Dashboard</h1>
+            <div class="last-update">Последнее обновление: <span id="lastUpdate">-</span></div>
+        </header>
+
+        <!-- Filters Section -->
+        <section class="filters">
+            <div class="filter-group">
+                <label for="projectFilter">Проект:</label>
+                <select id="projectFilter">
+                    <option value="">Все проекты</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="dateFrom">Период с:</label>
+                <input type="date" id="dateFrom">
+            </div>
+
+            <div class="filter-group">
+                <label for="dateTo">по:</label>
+                <input type="date" id="dateTo">
+            </div>
+
+            <button id="resetFilters" class="btn-reset">Сбросить фильтры</button>
+        </section>
+
+        <!-- KPI Cards Section -->
+        <section class="kpi-cards">
+            <!-- Burn Rate -->
+            <div class="kpi-card">
+                <div class="kpi-icon">🔥</div>
+                <div class="kpi-content">
+                    <h3>Burn Rate</h3>
+                    <div class="kpi-value" id="burnRate">-</div>
+                    <div class="kpi-description">Факт / План часов</div>
+                    <div class="kpi-status" id="burnRateStatus"></div>
+                </div>
+            </div>
+
+            <!-- Quality Rate -->
+            <div class="kpi-card">
+                <div class="kpi-icon">✅</div>
+                <div class="kpi-content">
+                    <h3>Quality Rate</h3>
+                    <div class="kpi-value" id="qualityRate">-</div>
+                    <div class="kpi-description">% переделок (цель &lt;5%)</div>
+                    <div class="kpi-status" id="qualityStatus"></div>
+                </div>
+            </div>
+
+            <!-- Overhead Ratio -->
+            <div class="kpi-card">
+                <div class="kpi-icon">📊</div>
+                <div class="kpi-content">
+                    <h3>Overhead Ratio</h3>
+                    <div class="kpi-value" id="overheadRatio">-</div>
+                    <div class="kpi-description">% времени на "ПРОЧЕЕ"</div>
+                    <div class="kpi-status" id="overheadStatus"></div>
+                </div>
+            </div>
+
+            <!-- Total Hours -->
+            <div class="kpi-card">
+                <div class="kpi-icon">⏱️</div>
+                <div class="kpi-content">
+                    <h3>Всего часов</h3>
+                    <div class="kpi-value" id="totalHours">-</div>
+                    <div class="kpi-description">За выбранный период</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Charts Section -->
+        <section class="charts">
+            <!-- Burn Rate Chart -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3>Burn Rate по проектам</h3>
+                    <span class="chart-subtitle">Сравнение факт/план часов</span>
+                </div>
+                <div id="burnRateChart"></div>
+            </div>
+
+            <!-- Load Balance Chart -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3>Load Balance - Пульс сотрудников</h3>
+                    <span class="chart-subtitle">Топ-6: лидеры и аутсайдеры</span>
+                </div>
+                <div id="loadBalanceChart"></div>
+            </div>
+
+            <!-- Overhead Trend Chart -->
+            <div class="chart-container full-width">
+                <div class="chart-header">
+                    <h3>Динамика Overhead Ratio</h3>
+                    <span class="chart-subtitle">Тренд накладных расходов по месяцам</span>
+                </div>
+                <div id="overheadTrendChart"></div>
+            </div>
+
+            <!-- Quality Trend Chart -->
+            <div class="chart-container full-width">
+                <div class="chart-header">
+                    <h3>Динамика Quality Rate</h3>
+                    <span class="chart-subtitle">Процент переделок по месяцам</span>
+                </div>
+                <div id="qualityTrendChart"></div>
+            </div>
+        </section>
+
+        <!-- Loading Indicator -->
+        <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+            <div class="spinner"></div>
+            <p>Загрузка данных...</p>
+        </div>
+
+        <!-- Error Message -->
+        <div id="errorMessage" class="error-message" style="display: none;">
+            <p>Ошибка загрузки данных. Пожалуйста, попробуйте позже.</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/metrics.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
