@@ -7,6 +7,10 @@ package-lock.json
 .env.local
 .env.production
 
+# Google Sheets credentials
+*credentials*.json
+vibebot*.json
+
 # Logs
 logs/
 *.log
